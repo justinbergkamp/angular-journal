@@ -16,9 +16,18 @@
           <div id="wordCount">Words: {{ words }}</div>
         </div>
         <mat-divider inset=[true]></mat-divider>
-        <h3>How are you feeling?</h3>
+        <h3>I'm feeling
+            <span [ngClass]="{'mood-1': moodslider.value == 1,
+                              'mood-2': moodslider.value == 2,
+                              'mood-3': moodslider.value == 3,
+                              'mood-4': moodslider.value == 4,
+                              'mood-5': moodslider.value == 5 }">
+              {{mood}}
+            </span>
+        today</h3>
         <mat-slider
         class="mood-slider"
+        #moodslider
         formControlName="slider"
         (input)="onSliderChange($event)"
         [max]="max"

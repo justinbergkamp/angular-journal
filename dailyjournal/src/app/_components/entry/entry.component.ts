@@ -3,6 +3,14 @@ import { FormBuilder } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
+enum Mood {
+  awful = 1,
+  bad,
+  okay,
+  good,
+  fantastic
+}
+
 
 @Component({
   selector: 'app-entry',
@@ -22,6 +30,8 @@ export class EntryComponent implements OnInit {
   day = "Monday";
   time = "evening";
   prompt = "What are some things you're grateful for?"
+  initMoodVal = 3;
+  mood = Mood[this.initMoodVal]
 
   wordCount: any;
   @ViewChild("entryText") text: ElementRef;
@@ -35,15 +45,16 @@ export class EntryComponent implements OnInit {
 
   entryForm = new FormGroup({
     content: new FormControl('',Validators.required),
-    slider: new FormControl (3)
+    slider: new FormControl (this.initMoodVal)
   });
   constructor() { }
 
   ngOnInit(): void { }
 
   onSliderChange(event) {
-  console.log("This is emitted as the thumb slides");
   console.log(event.value);
+  console.log(Mood[event.value])
+  this.mood = Mood[event.value]
 }
 
   onSubmit() {
