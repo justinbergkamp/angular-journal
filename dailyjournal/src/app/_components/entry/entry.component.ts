@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { EntryService } from '../../_services/entry.service';
+
 
 enum Mood {
   awful = 1,
@@ -19,17 +21,15 @@ enum Mood {
 })
 export class EntryComponent implements OnInit {
 
-  autoTicks = true;
   max = 5;
   min = 1;
-  showTicks = true;
   step = 1;
   thumbLabel = true;
   tickInterval = 1;
 
-  day = "Monday";
-  time = "evening";
-  prompt = "What are some things you're grateful for?"
+  day : string;
+  time : string;
+  prompt : string;
   initMoodVal = 3;
   mood = Mood[this.initMoodVal]
 
@@ -47,15 +47,25 @@ export class EntryComponent implements OnInit {
     content: new FormControl('',Validators.required),
     slider: new FormControl (this.initMoodVal)
   });
-  constructor() { }
+  constructor(private entryService: EntryService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.entryService.getDayOfWeek().subscribe((response) => {
+      this.day = response
+    });
+    this.entryService.getTimeOfDay().subscribe((response) => {
+      this.time = response
+    });
+    this.entryService.getPrompt().subscribe((response) => {
+      this.prompt = response
+    });
+
+  }
+
 
   onSliderChange(event) {
-  console.log(event.value);
-  console.log(Mood[event.value])
-  this.mood = Mood[event.value]
-}
+    this.mood = Mood[event.value]
+  }
 
   onSubmit() {
     // TODO: Use EventEmitter with form value
