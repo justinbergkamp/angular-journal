@@ -3,12 +3,21 @@ import { FormBuilder } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-entry',
   templateUrl: './entry.component.html',
   styleUrls: ['./entry.component.sass']
 })
 export class EntryComponent implements OnInit {
+
+  autoTicks = true;
+  max = 5;
+  min = 1;
+  showTicks = true;
+  step = 1;
+  thumbLabel = true;
+  tickInterval = 1;
 
   day = "Monday";
   time = "evening";
@@ -25,15 +34,23 @@ export class EntryComponent implements OnInit {
 
 
   entryForm = new FormGroup({
-    content: new FormControl('',Validators.required)
+    content: new FormControl('',Validators.required),
+    slider: new FormControl (3)
   });
   constructor() { }
 
   ngOnInit(): void { }
 
+  onSliderChange(event) {
+  console.log("This is emitted as the thumb slides");
+  console.log(event.value);
+}
+
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.warn(this.entryForm.value);
+    console.warn(this.entryForm.controls.content.value);
+    console.warn(this.entryForm.controls.slider.value);
   }
 
 }
