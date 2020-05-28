@@ -3,6 +3,11 @@ import { FormBuilder } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { EntryService } from '../../_services/entry.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { DatePipe } from '@angular/common';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 
 
 enum Mood {
@@ -24,7 +29,6 @@ export class EntryComponent implements OnInit {
   max = 5;
   min = 1;
   step = 1;
-  thumbLabel = true;
   tickInterval = 1;
 
   day : string;
@@ -32,12 +36,13 @@ export class EntryComponent implements OnInit {
   prompt : string;
   initMoodVal = 3;
   mood = Mood[this.initMoodVal]
+  dateToday: number = Date.now();
+  submitted: boolean = false;
 
-  wordCount: any;
+  wordCount: any = 0 ;
   @ViewChild("entryText") text: ElementRef;
   words: any = 0;
   wordCounter() {
-    //alert(this.text.nativeElement.value)
     this.wordCount = this.text ? this.text.nativeElement.value.split(/\s+/) : 0;
     this.words = this.wordCount ? this.wordCount.length : 0;
   }
@@ -47,28 +52,42 @@ export class EntryComponent implements OnInit {
     content: new FormControl('',Validators.required),
     slider: new FormControl (this.initMoodVal)
   });
-  constructor(private entryService: EntryService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private entryService: EntryService,
+    private datePipe: DatePipe) { }
 
   ngOnInit(): void {
-    this.entryService.getDayOfWeek().subscribe((response) => {
-      this.day = response
-    });
-    this.entryService.getTimeOfDay().subscribe((response) => {
-      this.time = response
-    });
+
+    let date = this.route.snapshot.paramMap.get('date');
+    let mode = this.route.snapshot.paramMap.get('mode')
+
+
+    this.day = this.datePipe.transform(this.dateToday, 'EEEE');
+    let period = +(this.datePipe.transform(this.dateToday, 'H'))
+    if(period >= 21 || period < 4){
+      this.time = "night"
+    }else if (period >= 4 &&  period < 12){
+      this.time = "morning"
+    }else if(period >= 12 ||  period < 17){
+      this.time = "afternoon"
+    }else if(period >= 17 ||  period < 21){
+      this.time = "evening"
+    }
+
     this.entryService.getPrompt().subscribe((response) => {
       this.prompt = response
     });
 
   }
 
-
   onSliderChange(event) {
     this.mood = Mood[event.value]
   }
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
+    this.submitted = true;
     console.warn(this.entryForm.value);
     console.warn(this.entryForm.controls.content.value);
     console.warn(this.entryForm.controls.slider.value);

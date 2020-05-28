@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 
 import { AngularMaterialModule } from './angular-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
@@ -13,6 +15,8 @@ import { FormsModule } from '@angular/forms';
 
 import { DashboardComponent } from './_components/dashboard/dashboard.component';
 import { EntryComponent } from './_components/entry/entry.component';
+
+import { DatePipe } from '@angular/common';
 
 
 
@@ -28,9 +32,10 @@ import { EntryComponent } from './_components/entry/entry.component';
     AngularMaterialModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    FlexLayoutModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

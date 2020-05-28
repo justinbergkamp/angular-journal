@@ -7,7 +7,7 @@ import { EntryComponent } from './_components/entry/entry.component';
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'entry', component: EntryComponent },
+  { path: 'entry/:date/:mode', component: EntryComponent },
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
   ];

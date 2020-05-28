@@ -1,43 +1,43 @@
 
-<div class="main-div" ngClass.lt-md="main-div-small">
+  <div class="main-div">
+      <mat-card class="entry-card" ngClass.lt-md="small-entry-card">
+        <form [formGroup]="entryForm" (ngSubmit)="onSubmit()">
 
+        <mat-card-header>
+          <mat-icon mat-card-avatar aria-hidden="false" aria-label="create icon">create</mat-icon>
+          <mat-card-title>What's on your mind this {{day}} {{time}}?</mat-card-title>
+          <mat-card-subtitle>Daily Prompt: {{prompt}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="card-content">
+          <textarea (keydown)="wordCounter()" #entryText formControlName="content" placeholder="Ex. It makes me feel..."></textarea>
+          <div id="content-counters">
+            <div>Chars: {{ entryText.value.length }}</div>
+            <div id="wordCount">Words: {{ words }}</div>
+          </div>
+          <mat-divider inset=[true]></mat-divider>
+          <h3>I'm feeling
+              <span [ngClass]="{'mood-1': moodslider.value == 1,
+                                'mood-2': moodslider.value == 2,
+                                'mood-3': moodslider.value == 3,
+                                'mood-4': moodslider.value == 4,
+                                'mood-5': moodslider.value == 5 }">
+                {{mood}}</span> today</h3>
+          <mat-slider
+          class="mood-slider"
+          #moodslider
+          formControlName="slider"
+          (input)="onSliderChange($event)"
+          [max]="max"
+          [min]="min"
+          [step]="step"
+          [tickInterval]="tickInterval">
+        </mat-slider>
+      </mat-card-content>
+      <mat-card-actions class="card-actions">
+        <button mat-button type="submit" [disabled]="!entryForm.valid">Submit</button>
+      </mat-card-actions>
+      </form>
+    </mat-card>
+    <div id="analytics" *ngIf="submitted">Content to render when condition is true.</div>
 
-  <form [formGroup]="entryForm" (ngSubmit)="onSubmit()">
-    <mat-card class="entry-card center" ngClass.lt-md="small-entry-card">
-      <mat-card-header>
-        <mat-icon mat-card-avatar aria-hidden="false" aria-label="create icon">create</mat-icon>
-        <mat-card-title>What's on your mind this {{day}} {{time}}?</mat-card-title>
-        <mat-card-subtitle>{{prompt}}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content class="card-content">
-        <textarea (keydown)="wordCounter()" #entryText formControlName="content" placeholder="Ex. It makes me feel..."></textarea>
-        <div id="content-counters">
-          <div>Chars: {{ entryText.value.length }}</div>
-          <div id="wordCount">Words: {{ words }}</div>
-        </div>
-        <mat-divider inset=[true]></mat-divider>
-        <h3>I'm feeling
-            <span [ngClass]="{'mood-1': moodslider.value == 1,
-                              'mood-2': moodslider.value == 2,
-                              'mood-3': moodslider.value == 3,
-                              'mood-4': moodslider.value == 4,
-                              'mood-5': moodslider.value == 5 }">
-              {{mood}}</span> today</h3>
-        <mat-slider
-        class="mood-slider"
-        #moodslider
-        formControlName="slider"
-        (input)="onSliderChange($event)"
-        [max]="max"
-        [min]="min"
-        [step]="step"
-        [thumbLabel]="thumbLabel"
-        [tickInterval]="tickInterval">
-      </mat-slider>
-    </mat-card-content>
-    <mat-card-actions class="card-actions">
-      <button mat-button type="submit" [disabled]="!entryForm.valid">Submit</button>
-    </mat-card-actions>
-  </mat-card>
-</form>
-</div>
+  </div>
