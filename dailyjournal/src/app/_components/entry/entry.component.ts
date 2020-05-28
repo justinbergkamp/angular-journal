@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
@@ -7,7 +7,12 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {SubmitDialogComponent} from '../submit-dialog/submit-dialog.component'
 
+export interface DialogData {
+  animal: string;
+  name: string;
+}
 
 
 enum Mood {
@@ -39,6 +44,9 @@ export class EntryComponent implements OnInit {
   dateToday: number = Date.now();
   submitted: boolean = false;
 
+  animal: string;
+name: string;
+
   wordCount: any = 0 ;
   @ViewChild("entryText") text: ElementRef;
   words: any = 0;
@@ -56,7 +64,8 @@ export class EntryComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private entryService: EntryService,
-    private datePipe: DatePipe) { }
+    private datePipe: DatePipe,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -82,12 +91,25 @@ export class EntryComponent implements OnInit {
 
   }
 
+  openDialog(): void {
+  const dialogRef = this.dialog.open(SubmitDialogComponent, {
+    width: '250px',
+    data: {name: this.name, animal: this.animal}
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+    this.animal = result;
+  });
+}
+
   onSliderChange(event) {
     this.mood = Mood[event.value]
   }
 
   onSubmit() {
     this.submitted = true;
+    this.openDialog()
     console.warn(this.entryForm.value);
     console.warn(this.entryForm.controls.content.value);
     console.warn(this.entryForm.controls.slider.value);

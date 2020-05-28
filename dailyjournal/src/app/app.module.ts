@@ -17,6 +17,7 @@ import { DashboardComponent } from './_components/dashboard/dashboard.component'
 import { EntryComponent } from './_components/entry/entry.component';
 
 import { DatePipe } from '@angular/common';
+import { SubmitDialogComponent } from './_components/submit-dialog/submit-dialog.component';
 
 
 
@@ -24,7 +25,8 @@ import { DatePipe } from '@angular/common';
   declarations: [
     AppComponent,
     DashboardComponent,
-    EntryComponent
+    EntryComponent,
+    SubmitDialogComponent
   ],
   imports: [
     BrowserModule,

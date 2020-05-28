@@ -21,6 +21,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -49,7 +50,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
       MatExpansionModule,
       MatSlideToggleModule,
       DragDropModule,
-      MatSliderModule
+      MatSliderModule,
+      MatDialogModule
    ],
    exports: [
       MatButtonModule,
@@ -72,7 +74,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
       MatExpansionModule,
       MatSlideToggleModule,
       DragDropModule,
-      MatSliderModule
+      MatSliderModule,
+      MatDialogModule
    ],
    providers: [
       MatDatepickerModule,
