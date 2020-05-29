@@ -10,7 +10,6 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import {SubmitDialogComponent} from '../submit-dialog/submit-dialog.component'
 
 export interface DialogData {
-  animal: string;
   name: string;
 }
 
@@ -44,8 +43,7 @@ export class EntryComponent implements OnInit {
   dateToday: number = Date.now();
   submitted: boolean = false;
 
-  animal: string;
-name: string;
+  name: string = "Justin";
 
   wordCount: any = 0 ;
   @ViewChild("entryText") text: ElementRef;
@@ -93,13 +91,12 @@ name: string;
 
   openDialog(): void {
   const dialogRef = this.dialog.open(SubmitDialogComponent, {
-    width: '250px',
-    data: {name: this.name, animal: this.animal}
+    width: '500px',
+    data: {name: this.name}
   });
 
   dialogRef.afterClosed().subscribe(result => {
     console.log('The dialog was closed');
-    this.animal = result;
   });
 }
 
