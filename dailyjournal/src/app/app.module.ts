@@ -22,6 +22,12 @@ import { LineChartComponent } from './_charts/line-chart/line-chart.component';
 import { ChartsModule } from 'ng2-charts';
 import { BarChartComponent } from './_charts/bar-chart/bar-chart.component';
 
+/* Add Amplify imports */
+import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
+import Amplify from 'aws-amplify';
+import awsconfig from './aws-exports';
+/* Configure Amplify resources */
+Amplify.configure(awsconfig);
 
 
 
@@ -35,6 +41,7 @@ import { BarChartComponent } from './_charts/bar-chart/bar-chart.component';
     BarChartComponent
   ],
   imports: [
+    AmplifyUIAngularModule,
     BrowserModule,
     AppRoutingModule,
     AngularMaterialModule,

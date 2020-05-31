@@ -1,0 +1,10 @@
+{
+	"auth": {
+		"dailyjournal75c6ec59": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	}
+}

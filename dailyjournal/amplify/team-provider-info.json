@@ -1,0 +1,20 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-dailyjournal-dev-215640-authRole",
+            "UnauthRoleArn": "arn:aws:iam::013125377964:role/amplify-dailyjournal-dev-215640-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::013125377964:role/amplify-dailyjournal-dev-215640-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-dailyjournal-dev-215640-deployment",
+            "UnauthRoleName": "amplify-dailyjournal-dev-215640-unauthRole",
+            "StackName": "amplify-dailyjournal-dev-215640",
+            "StackId": "arn:aws:cloudformation:us-east-1:013125377964:stack/amplify-dailyjournal-dev-215640/1f21a0d0-a2fb-11ea-bae8-0a1f71f25d05",
+            "AmplifyAppId": "d2aidqmyp9my14"
+        },
+        "categories": {
+            "auth": {
+                "dailyjournal75c6ec59": {}
+            }
+        }
+    }
+}
