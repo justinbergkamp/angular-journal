@@ -92,6 +92,7 @@ export class EntryComponent implements OnInit {
   openDialog(): void {
   const dialogRef = this.dialog.open(SubmitDialogComponent, {
     width: '500px',
+    height: '500px',
     data: {name: this.name}
   });
 

@@ -18,6 +18,10 @@ import { EntryComponent } from './_components/entry/entry.component';
 
 import { DatePipe } from '@angular/common';
 import { SubmitDialogComponent } from './_components/submit-dialog/submit-dialog.component';
+import { LineChartComponent } from './_charts/line-chart/line-chart.component';
+import { ChartsModule } from 'ng2-charts';
+import { BarChartComponent } from './_charts/bar-chart/bar-chart.component';
+
 
 
 
@@ -26,7 +30,9 @@ import { SubmitDialogComponent } from './_components/submit-dialog/submit-dialog
     AppComponent,
     DashboardComponent,
     EntryComponent,
-    SubmitDialogComponent
+    SubmitDialogComponent,
+    LineChartComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +41,8 @@ import { SubmitDialogComponent } from './_components/submit-dialog/submit-dialog
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ChartsModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
