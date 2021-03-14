@@ -1,5 +1,5 @@
 # angular-journal
-Angular project for a simple journal PWA
+Angular project for a simple journal application
 
 
 First step is to initialize the project:
